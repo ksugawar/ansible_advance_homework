@@ -1,0 +1,27 @@
+---
+- name: gather facts from the cloud
+  hosts: bastion
+  gather_facts: true
+  roles:
+  - name: osp-facts
+
+- name: deploy frontends
+  hosts: frontends
+  become: yes
+  roles:
+    - name: 3tier-repo
+    - name: frontends
+
+- name: deploy apps
+  hosts: apps
+  become: yes
+  roles:
+    - name: 3tier-repo
+    - name: apps
+
+- name: deploy database
+  become: yes
+  hosts: appdbs
+  roles:
+    - name: 3tier-repo
+    - name: appdbs

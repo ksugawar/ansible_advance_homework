@@ -1,0 +1,23 @@
+---
+# tasks file for apps
+- name: install tomcat and apache
+  yum:
+    name: [ tomcat, httpd ]
+    state: latest
+
+- name: create ansible tomcat directory
+  file:
+    path: /usr/share/tomcat/webapps/ansible
+    state: directory
+
+- name: copy static index.html to tomcat webapps/ansible/index.html
+  template:
+    src: index.html.j2
+    dest: /usr/share/tomcat/webapps/ansible/index.html
+    mode: 0644
+
+- name: enable and start tomcat and apache
+  service:
+    name: [ tomcat, httpd ]
+    state: started
+    enabled: yes
