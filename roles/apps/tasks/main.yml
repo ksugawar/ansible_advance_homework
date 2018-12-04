@@ -18,6 +18,9 @@
 
 - name: enable and start tomcat and apache
   service:
-    name: [ tomcat, httpd ]
+    name: {{ item }}
     state: started
     enabled: yes
+  loop: 
+    - tomcat
+    - httpd
