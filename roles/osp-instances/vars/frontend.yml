@@ -1,7 +1,7 @@
 ---
 instance_name: frontend
 group: frontends
-deployment_name: qa
+deployment: qa
 security_group_name: frontend
 
 
