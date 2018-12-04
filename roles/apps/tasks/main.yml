@@ -18,7 +18,7 @@
 
 - name: enable and start tomcat and apache
   service:
-    name: {{ item }}
+    name: "{{ item }}"
     state: started
     enabled: yes
   loop: 
