@@ -1,6 +1,6 @@
 ---
 - name: gather facts from the cloud
-  hosts: bastion
+  hosts: workstation
   gather_facts: true
   roles:
   - name: osp-facts
