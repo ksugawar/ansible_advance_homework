@@ -13,7 +13,7 @@
 - name: copy static index.html to tomcat webapps root dir
   template:
     src: index.html.j2
-    dest: "{{ tomcat_webapp_root }}"/index.html
+    dest: "{{ tomcat_webapp_root }}/index.html"
     mode: 0644
 
 - name: enable and start tomcat and apache
