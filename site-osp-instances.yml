@@ -1,8 +1,4 @@
-- name: site-osp-instances
-  # hosts: workstation
-  hosts: localhost
-  connection: local
-  gather_facts: false
+- hosts: workstation
   become: yes
   tasks:
 ##Create Fronend Instance
