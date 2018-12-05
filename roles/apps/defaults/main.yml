@@ -1,2 +1,2 @@
 ---
-tomcat_webapp_root: /usr/share/tomcat/webapps/ROOT
+tomcat_webapp_root: /var/www/html
