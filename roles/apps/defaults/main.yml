@@ -1,2 +1,3 @@
 ---
-tomcat_webapp_root: /var/www/html
+httpd_content_root: /var/www/html
+tomcat_webapp_root: /var/lib/tomcat/webapps/ROOT
