@@ -5,10 +5,27 @@
     name: [ tomcat, httpd ]
     state: latest
 
-- name: create ansible tomcat directory
+- name: create ROOT webapp config dir
+  file:
+    path: "{{ tomcat_config_path }}"
+    state: directory
+
+- name: deploy ROOT webapp config
+  template:
+    src: ROOT.xml.j2
+    dest: "{{ tomcat_config_path }}/ROOT.xml"
+    mode: 0644
+
+- name: create tomcat ROOT webapp root directory
   file:
     path: "{{ tomcat_webapp_root }}"
     state: directory
+
+- name: copy static index.html to httpd webapps root dir
+  template:
+    src: index.html.j2
+    dest: "{{ httpd_content_root }}/index.html"
+    mode: 0644
 
 - name: copy static index.html to tomcat webapps root dir
   template:

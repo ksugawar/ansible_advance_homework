@@ -1,3 +1,4 @@
 ---
+tomcat_config_path: /etc/tomcat/Catalina/localhost/ROOT
 httpd_content_root: /var/www/html
 tomcat_webapp_root: /var/lib/tomcat/webapps/ROOT
