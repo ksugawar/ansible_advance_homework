@@ -21,12 +21,6 @@
     path: "{{ tomcat_webapp_root }}"
     state: directory
 
-- name: copy static index.html to httpd webapps root dir
-  template:
-    src: index.html.j2
-    dest: "{{ httpd_content_root }}/index.html"
-    mode: 0644
-
 - name: copy static index.html to tomcat webapps root dir
   template:
     src: index.html.j2
