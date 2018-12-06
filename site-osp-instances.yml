@@ -1,30 +1,45 @@
 - hosts: workstation
   become: yes
+
+  vars:
+    instances: []
+
   tasks:
-##Create Fronend Instance
-  - name: Create frontend instance
-    include_role:
-       name: osp-instances
-       vars_from: frontend.yml
-###Create App1 server 
-  - name: Create app1 instance
-    include_role:
-       name: osp-instances
-       vars_from: app1.yml
-##Create App2 server
-  - name: Create app2 instance
-    include_role:
-       name: osp-instances
-       vars_from: app2.yml
-##Create DB server
-  - name: Create db instance
-    include_role:
-       name: osp-instances
-       vars_from: db.yml
-## Alternate Method to create dynmaic inventory
-  - name: Gather facts
+  - name: Gather instances already deployed
     include_role: 
        name: osp-facts
     tags:
      - test_inventory
+
+  - set_fact:
+      instances: "{{ result.ansible_facts.openstack_servers | json_query('[*].name') }}"
+
+  - debug:
+      var: instances
+
+  # os_server module not idempotent (errors out when deploying an instance with the same name)
+  ##Create Frontend Instance
+  - name: Create frontend instance
+    include_role:
+       name: osp-instances
+       vars_from: frontend.yml
+    when: "'frontend' not in instances"
+  ##Create App1 server 
+  - name: Create app1 instance
+    include_role:
+       name: osp-instances
+       vars_from: app1.yml
+    when: "'app1' not in instances"
+  ##Create App2 server
+  - name: Create app2 instance
+    include_role:
+       name: osp-instances
+       vars_from: app2.yml
+    when: "'app2' not in instances"
+  ##Create DB server
+  - name: Create db instance
+    include_role:
+       name: osp-instances
+       vars_from: db.yml
+    when: "'db' not in instances"
 
