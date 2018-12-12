@@ -1,0 +1,9 @@
+---
+- name: restart httpd and tomcat
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop: 
+    - tomcat
+    - httpd
+  listen: "restart httpd and tomcat"

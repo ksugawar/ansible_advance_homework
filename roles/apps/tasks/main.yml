@@ -15,22 +15,28 @@
     src: ROOT.xml.j2
     dest: "{{ tomcat_config_path }}/ROOT.xml"
     mode: 0644
+  notify:
+    - "restart httpd and tomcat"
 
 - name: create tomcat ROOT webapp root directory
   file:
     path: "{{ tomcat_webapp_root }}"
     state: directory
+  notify:
+    - "restart httpd and tomcat"
 
 - name: copy static index.html to tomcat webapps root dir
   template:
     src: index.html.j2
     dest: "{{ tomcat_webapp_root }}/index.html"
     mode: 0644
+  notify:
+    - "restart httpd and tomcat"
 
 - name: enable and start tomcat and apache
   service:
     name: "{{ item }}"
-    state: restarted
+    state: started
     enabled: yes
   loop: 
     - tomcat
