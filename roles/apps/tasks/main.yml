@@ -22,8 +22,6 @@
   file:
     path: "{{ tomcat_webapp_root }}"
     state: directory
-  notify:
-    - "restart httpd and tomcat"
 
 - name: copy static index.html to tomcat webapps root dir
   template:
